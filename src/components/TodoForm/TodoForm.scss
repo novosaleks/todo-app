@@ -1,0 +1,18 @@
+.todo-form {
+  margin-top: 3rem;
+
+  input {
+    width: 100%;
+    background-color: hsl(235, 24%, 19%);
+    color: hsl(234, 39%, 85%);
+    height: 3rem;
+    border: none;
+    line-height: 3;
+    border-radius: 7px;
+    padding-left: 3rem;
+
+    &::placeholder {
+      color: hsl(234, 39%, 85%);
+    }
+  }
+}
