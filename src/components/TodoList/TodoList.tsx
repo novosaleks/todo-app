@@ -1,23 +1,16 @@
 import React from 'react';
-import TodoItem from '../TodoItem';
 
 import './TodoList.scss';
-import { todoItem } from '../../utils/types';
+import { TodoItemEntity } from '../../entities';
 
 interface TodoListProps {
-    todoList: todoItem[] | []
+    todos: TodoItemEntity[],
+    children: (todo: TodoItemEntity) => JSX.Element,
 }
 
-const TodoList: React.FC<TodoListProps> = ({ todoList }) => {
-    const todoListComponents = todoList.map((element: todoItem) => {
-        const {id, ...item} = element;
+const TodoList: React.FC<TodoListProps> = ({ children, todos }) => {
 
-        return (
-            <li key={id} className='todo-list__item'>
-                <TodoItem {...item} />
-            </li>
-        )
-    });
+    const todoListComponents = todos.map(children);
 
     return (
         <ul className='todo-list'>

@@ -1,0 +1,8 @@
+.todo-item {
+	column-gap: 2rem;
+}
+
+.todo-item__label.completed {
+	text-decoration: line-through;
+	color: #4c4c4c;
+}
