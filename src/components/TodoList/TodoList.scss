@@ -5,12 +5,12 @@
 }
 
 .todo-list__item {
-  background-color: hsl(235, 24%, 19%);
+  background-color: var(--primary-color);
   color: hsl(234, 39%, 85%);
   border-bottom: 1px solid hsl(234, 39%, 85%);
   height: 3rem;
   line-height: 3;
-  padding-left: 1rem;
+  padding: 0 1rem;
 
   &:first-child {
     border-radius: 7px 7px 0 0;

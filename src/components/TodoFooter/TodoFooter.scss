@@ -1,11 +1,37 @@
 .todo-footer {
-  color: hsl(234, 11%, 52%);
-  background-color: hsl(235, 24%, 19%);
-  height: 3rem;
-  padding: 0 2.3rem;
-  border-radius: 0 0 7px 7px;
+	color: hsl(234, 11%, 52%);
+	background-color: var(--primary-color);
+	height: 3rem;
+	padding: 0 2.3rem;
+	border-radius: 0 0 7px 7px;
 }
 
 .todo-footer__filter {
-  column-gap: 15px;
+	column-gap: 15px;
+}
+
+.todo-footer__clear {
+	cursor: pointer;
+	transition: all .4s;
+
+	&:hover {
+		color: #c8c8c8;
+	}
+}
+
+.todo-footer__filter-item {
+	cursor: pointer;
+
+	&:hover {
+		transition: all .4s;
+		color: #c8c8c8;
+	}
+}
+
+.todo-footer__filter-item[data-selected='true'] {
+	color: #0181b5;
+
+	&:hover {
+		color: #00e2ff;
+	}
 }

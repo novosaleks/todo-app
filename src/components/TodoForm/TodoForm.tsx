@@ -18,7 +18,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ createNewItem }) => {
         }
     };
 
-    const inputHandler = (e: React.FormEvent<HTMLInputElement>) => {
+    const inputHandler = (e: React.KeyboardEvent<HTMLInputElement>) => {
         setUserInput(e.currentTarget.value);
     };
 
