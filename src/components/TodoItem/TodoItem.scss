@@ -8,5 +8,5 @@
 
 .todo-item__label.completed {
 	text-decoration: line-through;
-	color: #4c4c4c;
+	color: var(--secondary-text-color);
 }

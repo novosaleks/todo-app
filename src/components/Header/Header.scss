@@ -1,0 +1,11 @@
+.header {
+	width: 100%;
+	min-height: 300px;
+	background: var(--desktop-img) center center/cover no-repeat;
+}
+
+@media (max-width: 425px) {
+	.header {
+		background-image: var(--mobile-img);
+	}
+}

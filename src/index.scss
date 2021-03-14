@@ -2,13 +2,34 @@
 @import '~bootstrap/dist/css/bootstrap-grid.min.css';
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
 
+
 body {
 	font-family: 'Josefin Sans', sans-serif;
-	background-color: #454545;
-	--primary-color: hsl(235, 24%, 19%);
+	background-color: hsl(0, 0%, 98%);
+	--primary-color: #fff;
+	--primary-text-color: hsl(235, 19%, 35%);
+	--secondary-text-color: hsl(240, 5%, 65%);
+	--border-color: #e6e5ea;
+	--desktop-img: url("assets/images/bg-desktop-light.jpg");
+	--mobile-img: url("assets/images/bg-mobile-light.jpg");
 }
 
-h1, h2, h3, h4, h5, h6 {
+body[data-theme='dark'] {
+	background-color: hsl(235, 24%, 19%);;
+	--primary-color: #181824;
+	--primary-text-color: hsl(234, 39%, 85%);
+	--secondary-text-color: #4c4c4c;
+	--border-color: #37394e;
+	--desktop-img: url("assets/images/bg-desktop-dark.jpg");
+	--mobile-img: url("assets/images/bg-mobile-dark.jpg");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	margin: 0;
 	line-height: 1;
 }
