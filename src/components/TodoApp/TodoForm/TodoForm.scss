@@ -5,7 +5,7 @@
 		width: 100%;
 		background-color: var(--primary-color);
 		color: var(--primary-text-color);
-		height: 3rem;
+		min-height: 3rem;
 		border: none;
 		line-height: 3;
 		border-radius: 7px;
@@ -27,7 +27,7 @@
 	user-focus: none;
 
 	input {
-		outline: 2px #f83420 solid;
+		outline: 2px var(--validation-color) solid;
 	}
 
 	.todo-form__invalid-label {
@@ -35,6 +35,6 @@
 		position: absolute;
 		top: 50px;
 		left: 0;
-		color: #f83420;
+		color: var(--validation-color)
 	}
 }

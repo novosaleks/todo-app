@@ -16,13 +16,16 @@ const withTodoCore = () => (View: React.ComponentType<todoApp>) => {
         ]);
 
         useEffect(() => {
-            const JSONTodos = storage.getData('todo-app-list');
+            const todos = storage.getData('todo-app-list');
 
-            if (JSONTodos) {
-                const todos = JSON.parse(JSONTodos);
-                setTodos(todos);
+            if (todos) {
+                setTodos(JSON.parse(todos));
             }
         }, []);
+
+        useEffect(() => {
+            storage.setData('todo-app-list', JSON.stringify(todos));
+        }, [todos]);
 
         const [filterType, setFilterType] = useState<filterType>('all');
 

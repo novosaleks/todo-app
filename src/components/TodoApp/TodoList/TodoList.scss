@@ -10,7 +10,7 @@
 	background-color: var(--primary-color);
 	color: var(--primary-text-color);
 	border-bottom: 1px solid var(--border-color);
-	height: 3rem;
+	min-height: 3rem;
 	line-height: 3;
 	padding: 0 1rem;
 	transition: background-color var(--theme-transition-duration);

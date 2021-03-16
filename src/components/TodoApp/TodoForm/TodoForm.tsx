@@ -32,7 +32,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ createNewItem }) => {
         <form ref={form} onSubmit={submitHandler} className='todo-form' action="#">
             <input placeholder='Create a new todo...' onInput={inputHandler} value={userInput} type="text"/>
             <span
-                className='todo-form__invalid-label'>Tasks must contain at least {minCharactersNumber} and not more {maxCharacterNumber} characters</span>
+                className='todo-form__invalid-label'>Tasks must contain {minCharactersNumber}-{maxCharacterNumber} characters</span>
         </form>
     );
 
