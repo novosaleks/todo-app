@@ -1,0 +1,21 @@
+.filter {
+	column-gap: 15px;
+}
+
+.filter-item {
+	cursor: pointer;
+	font-weight: 700;
+
+	&:hover {
+		transition: all .4s;
+		color: var(--primary-text-color);
+	}
+}
+
+.filter-item[data-selected='true'] {
+	color: #0181b5;
+
+	&:hover {
+		color: #00e2ff;
+	}
+}

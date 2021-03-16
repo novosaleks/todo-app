@@ -1,0 +1,44 @@
+@mixin footerPanel {
+	color: var(--secondary-text-color);
+	background-color: var(--primary-color);
+	height: 3rem;
+	padding: 0 2.3rem;
+	border-radius: 0 0 7px 7px;
+	box-shadow: 0 5px 10px 2px var(--box-shadow-color);
+	transition: var(--theme-transition);
+}
+
+.todo-footer {
+	@include footerPanel;
+}
+
+.todo-footer__clear {
+	cursor: pointer;
+	transition: all .4s;
+
+	&:hover {
+		color: var(--primary-text-color);
+	}
+}
+
+.todo-filter__mobile {
+	@include footerPanel;
+	margin-top: 2rem;
+	border-radius: 7px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.todo-footer__label {
+	transition: var(--theme-transition);
+	margin-top: 3rem;
+	color: var(--secondary-text-color);
+	text-align: center;
+}
+
+@media (max-width: 425px) {
+	.todo-footer {
+		padding: 0 1rem;
+	}
+}

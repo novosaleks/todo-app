@@ -2,6 +2,8 @@
 	padding: 0;
 	list-style: none;
 	margin: 2rem 0 0;
+	box-shadow: 0 0 8px 3px var(--box-shadow-color);
+	transition: var(--theme-transition);
 }
 
 .todo-list__item {
@@ -11,6 +13,7 @@
 	height: 3rem;
 	line-height: 3;
 	padding: 0 1rem;
+	transition: background-color var(--theme-transition-duration);
 
 	&:first-child {
 		border-radius: 7px 7px 0 0;
