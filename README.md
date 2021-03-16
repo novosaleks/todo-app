@@ -1,6 +1,6 @@
 # Get started
 
-###You can find this project on [https://novosaleks.github.io/todo-app](https://novosaleks.github.io/todo-app)
+<h3>You can find this project on https://novosaleks.github.io/todo-app
 
 ## Available Scripts
 
