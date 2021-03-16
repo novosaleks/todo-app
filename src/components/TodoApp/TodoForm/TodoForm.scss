@@ -1,19 +1,40 @@
 .todo-form {
-  margin-top: 3rem;
+	margin-top: 3rem;
 
-  input {
-    width: 100%;
-    background-color: var(--primary-color);
-    color: var(--primary-text-color);
-    height: 3rem;
-    border: none;
-    line-height: 3;
-    border-radius: 7px;
-    padding-left: 3rem;
-    transition: var(--theme-transition);
+	input {
+		width: 100%;
+		background-color: var(--primary-color);
+		color: var(--primary-text-color);
+		height: 3rem;
+		border: none;
+		line-height: 3;
+		border-radius: 7px;
+		padding-left: 3rem;
+		transition: var(--theme-transition);
 
-    &::placeholder {
-      color: var(--secondary-text-color);
-    }
-  }
+		&::placeholder {
+			color: var(--secondary-text-color);
+		}
+	}
+
+	&__invalid-label {
+		display: none;
+	}
+}
+
+.todo-form.invalid {
+	position: relative;
+	user-focus: none;
+
+	input {
+		outline: 2px #f83420 solid;
+	}
+
+	.todo-form__invalid-label {
+		display: block;
+		position: absolute;
+		top: 50px;
+		left: 0;
+		color: #f83420;
+	}
 }
