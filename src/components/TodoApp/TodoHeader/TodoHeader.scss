@@ -1,0 +1,13 @@
+.todo-header__title {
+  letter-spacing: 15px;
+  color: #fff;
+}
+
+.todo-header img {
+  cursor: pointer;
+  transition: all .2s;
+
+  &:hover {
+    transform: scale(1.3);
+  }
+}

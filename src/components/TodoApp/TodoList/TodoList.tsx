@@ -1,8 +1,9 @@
 import React from 'react';
 
 import './TodoList.scss';
-import { TodoItemEntity } from '../../entities';
+import { TodoItemEntity } from '../../../entities';
 import { Droppable } from 'react-beautiful-dnd';
+import EmptyItem from '../EmptyItem';
 
 interface TodoListProps {
     todos: TodoItemEntity[],
@@ -17,7 +18,11 @@ const TodoList: React.FC<TodoListProps> = ({ children: renderFunction, todos }) 
         <Droppable droppableId='droppable'>
             {(provided) => (
                 <ul ref={provided.innerRef} {...provided.droppableProps} className='todo-list'>
-                    {todoListComponents}
+                    {todoListComponents.length ? todoListComponents :
+                        <li className='todo-list__item'>
+                            <EmptyItem/>
+                        </li>
+                    }
                     {provided.placeholder}
                 </ul>
             )

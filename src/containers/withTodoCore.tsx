@@ -1,28 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { TodoItemEntity } from '../entities';
 import { Draggable, DropResult } from 'react-beautiful-dnd';
-import TodoItem from '../components/TodoItem';
+import TodoItem from '../components/TodoApp/TodoItem';
+import { filterType, todoApp } from '../types';
 
-
-interface InjectedProps {
-    createNewItem: (label: string) => void,
-    onDragEnd: (result: DropResult) => void,
-    todos: TodoItemEntity[],
-    renderTodos: (todo: TodoItemEntity, idx: number) => JSX.Element,
-    activeTodosNumber: number,
-    removeAllCompleted: () => void,
-    setFilterType: (filter: 'all' | 'active' | 'completed') => void,
-    filterType: 'all' | 'active' | 'completed';
-}
-
-const withTodoCore = () => (View: React.ComponentType<InjectedProps>) => {
+const withTodoCore = () => (View: React.ComponentType<todoApp>) => {
     return () => {
         const [todos, setTodos] = useState<TodoItemEntity[]>([
             { ...new TodoItemEntity('Create your first task') },
         ]);
-        const [filterType, setFilterType] = useState<'all' | 'active' | 'completed'>('all');
 
-        const toggleCompletion = (id: number) => {
+        useEffect(() => {
+            const JSONTodos = localStorage.getItem('todo-app-list');
+
+            if (JSONTodos) {
+                const todos = JSON.parse(JSONTodos);
+                setTodos(todos);
+            }
+        }, []);
+
+        const [filterType, setFilterType] = useState<filterType>('all');
+
+        const toggleCompletion = (id: number): void => {
             setTodos(todos => {
                 const idx  = todos.findIndex(item => item.id === id),
                       todo = todos[idx];
@@ -35,32 +35,36 @@ const withTodoCore = () => (View: React.ComponentType<InjectedProps>) => {
             });
         };
 
-        const createNewItem = (label: string) => {
+        const createNewItem = (label: string): void => {
             setTodos(prevList => {
-                return [
+                const newList = [
                     ...prevList,
                     new TodoItemEntity(label)
                 ];
+
+                localStorage.setItem('todo-app-list', JSON.stringify(newList));
+
+                return newList;
             });
         };
 
-        const removeItem = (id: number) => {
+        const removeItem = (id: number): void => {
             setTodos(prevList => {
                 return prevList.filter(todo => todo.id !== id);
             });
         };
 
-        const removeAllCompleted = () => {
+        const removeAllCompleted = (): void => {
             setTodos(prevList => {
                 return prevList.filter(todo => !todo.completed);
             });
         };
 
-        const renderTodos = (todo: TodoItemEntity, idx: number) => {
+        const renderTodos = (todo: TodoItemEntity, idx: number): JSX.Element => {
             const { id, ...item } = todo;
 
             return (
-                <Draggable isDragDisabled={filterType !== 'all'} key={id} draggableId={`${id}`} index={idx}>
+                <Draggable key={id} draggableId={`${id}`} index={idx}>
                     {(provided) => (
                         <li ref={provided.innerRef}
                             {...provided.draggableProps}
@@ -69,12 +73,12 @@ const withTodoCore = () => (View: React.ComponentType<InjectedProps>) => {
                         >
                             <TodoItem
                                 removeItem={() => removeItem(id)}
+                                idx={idx}
                                 toggleCompletion={() => toggleCompletion(id)}
                                 {...item}
                             />
                         </li>
-                    )
-                    }
+                    )}
                 </Draggable>
             );
         };
@@ -83,7 +87,7 @@ const withTodoCore = () => (View: React.ComponentType<InjectedProps>) => {
             return todos.filter(item => !item.completed).length;
         };
 
-        const filterTodos = (filter: 'all' | 'active' | 'completed'): TodoItemEntity[] => {
+        const filterTodos = (filter: filterType): TodoItemEntity[] => {
             return todos.filter(todo => {
                 switch (filter) {
                     case 'all':
@@ -98,14 +102,28 @@ const withTodoCore = () => (View: React.ComponentType<InjectedProps>) => {
             });
         };
 
-        const onDragEnd = (result: DropResult) => {
+        const onDragEnd = (result: DropResult): void => {
             const { destination, source } = result;
 
             if (!destination || destination.index === source.index) {
                 return;
             }
 
-            reOrderItems(source.index, destination.index);
+            const [startIndex, endIndex] = filterType === 'all' ? [source.index, destination.index] :
+                getFullIndexes(source.index, destination.index);
+
+            reOrderItems(startIndex, endIndex);
+        };
+
+        const getFullIndexes = (initialStartIndex: number, initialEndIndex: number): [number, number] => {
+            const filteredTodos = filterTodos(filterType);
+            const startObjectId = filteredTodos[initialStartIndex].id,
+                  endObjectId   = filteredTodos[initialEndIndex].id;
+
+            return [
+                todos.findIndex(todo => todo.id === startObjectId),
+                todos.findIndex(todo => todo.id === endObjectId)
+            ];
         };
 
         const reOrderItems = (initialIndex: number, newIndex: number): void => {
@@ -130,7 +148,7 @@ const withTodoCore = () => (View: React.ComponentType<InjectedProps>) => {
                      onDragEnd={onDragEnd}
                      removeAllCompleted={removeAllCompleted}
                      renderTodos={renderTodos}
-                     setFilterType={setFilterType}/>
+                     setFilterType={setFilterType}/>;
     };
 };
 
