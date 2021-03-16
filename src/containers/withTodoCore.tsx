@@ -5,14 +5,18 @@ import { Draggable, DropResult } from 'react-beautiful-dnd';
 import TodoItem from '../components/TodoApp/TodoItem';
 import { filterType, todoApp } from '../types';
 
+import { StorageService } from '../services';
+
 const withTodoCore = () => (View: React.ComponentType<todoApp>) => {
+    const storage = new StorageService();
+
     return () => {
         const [todos, setTodos] = useState<TodoItemEntity[]>([
-            { ...new TodoItemEntity('Create your first task') },
+            new TodoItemEntity('Create your first task'),
         ]);
 
         useEffect(() => {
-            const JSONTodos = localStorage.getItem('todo-app-list');
+            const JSONTodos = storage.getData('todo-app-list');
 
             if (JSONTodos) {
                 const todos = JSON.parse(JSONTodos);
@@ -42,7 +46,7 @@ const withTodoCore = () => (View: React.ComponentType<todoApp>) => {
                     new TodoItemEntity(label)
                 ];
 
-                localStorage.setItem('todo-app-list', JSON.stringify(newList));
+                storage.setData('todo-app-list', JSON.stringify(newList));
 
                 return newList;
             });

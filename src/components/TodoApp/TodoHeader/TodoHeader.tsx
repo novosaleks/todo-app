@@ -5,9 +5,13 @@ import './TodoHeader.scss';
 import sun from '../../../assets/icons/icon-sun.svg';
 import moon from '../../../assets/icons/icon-moon.svg';
 
+import { StorageService } from '../../../services';
+
 const TodoHeader: React.FC = () => {
+    const storage = new StorageService();
+
     const generateInitialTheme = (): string => {
-        const newTheme = localStorage.getItem('todo-theme');
+        const newTheme = storage.getData('todo-theme');
 
         if (newTheme === 'light' || newTheme === 'dark') {
             return newTheme;
@@ -26,7 +30,7 @@ const TodoHeader: React.FC = () => {
         setTheme(currentTheme => {
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
 
-            localStorage.setItem('todo-theme', newTheme);
+            storage.setData('todo-theme', newTheme);
 
             return newTheme;
         });
